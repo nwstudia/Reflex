@@ -14,6 +14,10 @@
 		3F1682282B287EC0001B0D01 /* ReflexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682272B287EC0001B0D01 /* ReflexTests.swift */; };
 		3F1682322B287EC0001B0D01 /* ReflexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682312B287EC0001B0D01 /* ReflexUITests.swift */; };
 		3F1682342B287EC0001B0D01 /* ReflexUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682332B287EC0001B0D01 /* ReflexUITestsLaunchTests.swift */; };
+		3F1682452B2881BA001B0D01 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682442B2881BA001B0D01 /* Circle.swift */; };
+		3F1682472B288490001B0D01 /* ReflexGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682462B288490001B0D01 /* ReflexGameModel.swift */; };
+		3F1682492B2886C9001B0D01 /* ReflexGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682482B2886C9001B0D01 /* ReflexGameView.swift */; };
+		3F16824B2B2886D6001B0D01 /* ReflexGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16824A2B2886D6001B0D01 /* ReflexGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		3F16822D2B287EC0001B0D01 /* ReflexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReflexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1682312B287EC0001B0D01 /* ReflexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexUITests.swift; sourceTree = "<group>"; };
 		3F1682332B287EC0001B0D01 /* ReflexUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3F1682442B2881BA001B0D01 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		3F1682462B288490001B0D01 /* ReflexGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameModel.swift; sourceTree = "<group>"; };
+		3F1682482B2886C9001B0D01 /* ReflexGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameView.swift; sourceTree = "<group>"; };
+		3F16824A2B2886D6001B0D01 /* ReflexGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,10 @@
 		3F1682152B287EBF001B0D01 /* Reflex */ = {
 			isa = PBXGroup;
 			children = (
+				3F1682432B288171001B0D01 /* Common */,
+				3F1682422B28815F001B0D01 /* ViewModels */,
+				3F1682412B288154001B0D01 /* Views */,
+				3F1682402B28814A001B0D01 /* Models */,
 				3F1682162B287EBF001B0D01 /* ReflexApp.swift */,
 				3F1682182B287EBF001B0D01 /* ContentView.swift */,
 				3F16821A2B287EBF001B0D01 /* Assets.xcassets */,
@@ -125,6 +137,38 @@
 				3F1682332B287EC0001B0D01 /* ReflexUITestsLaunchTests.swift */,
 			);
 			path = ReflexUITests;
+			sourceTree = "<group>";
+		};
+		3F1682402B28814A001B0D01 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F1682462B288490001B0D01 /* ReflexGameModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F1682412B288154001B0D01 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F1682482B2886C9001B0D01 /* ReflexGameView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3F1682422B28815F001B0D01 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3F16824A2B2886D6001B0D01 /* ReflexGameViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3F1682432B288171001B0D01 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3F1682442B2881BA001B0D01 /* Circle.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +302,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1682192B287EBF001B0D01 /* ContentView.swift in Sources */,
+				3F1682492B2886C9001B0D01 /* ReflexGameView.swift in Sources */,
+				3F1682472B288490001B0D01 /* ReflexGameModel.swift in Sources */,
 				3F1682172B287EBF001B0D01 /* ReflexApp.swift in Sources */,
+				3F16824B2B2886D6001B0D01 /* ReflexGameViewModel.swift in Sources */,
+				3F1682452B2881BA001B0D01 /* Circle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
