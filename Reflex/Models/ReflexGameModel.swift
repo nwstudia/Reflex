@@ -7,13 +7,26 @@
 import Foundation
 import SwiftUI
 
-struct ReflexGameModel<CardContent : Equatable, Shape>
+struct ReflexGameModel<CircleContent : Shape>
 {
-    private(set) var circle : Array<Circle>
+    private(set) var circle : Array<CircleContent>
+    private(set) var score : Int
     
+    init(score: Int, circleContentFactory: (Int)->
+         CircleContent) {
+      
+        self.score = score
+    }
     
-    struct Circle : Equatable, Identifiable{
-        let content : CardContent
+    mutating func clicked(_ circle: Circle){
+        
+    }
+    
+    struct Circle : Identifiable{
+        let color : Color
+        let size : CGFloat
+        let isSafe : Bool
+        let content : CircleContent
         var id : String
     }
     
