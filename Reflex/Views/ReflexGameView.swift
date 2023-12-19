@@ -8,13 +8,26 @@
 import SwiftUI
 
 struct ReflexGameView: View {
+    @State var startDate = Date.now
+    @State var timeElapsed: Int = 0
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private var score : some View{
         Text("Score: 0")
             .animation(nil)
     }
     
-    private var timer : some View{
-        Text("Timer: 30")
+    private var timerView : some View{
+        Text("Timer: \(timeElapsed)")    .onReceive(timer) { firedDate in
+            
+            print("timer fired")
+            // 3
+            timeElapsed = Int(firedDate.timeIntervalSince(startDate))
+            if(timeElapsed >= 5)
+            {
+                startDate = Date.now
+            }
+        }
+        .font(.largeTitle)
             .animation(nil)
     }
     
@@ -25,7 +38,7 @@ struct ReflexGameView: View {
     var body: some View {
         VStack{
             HStack{
-                timer
+                timerView
                 Spacer()
                 score
             }
