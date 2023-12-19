@@ -9,25 +9,23 @@ import SwiftUI
 
 class ReflexGameViewModel : ObservableObject
 {
-    @Published var circleModel : ReflexGameModel<Circle>
-
+    @Published var circleModel : ReflexGameModel<Circle> = CreateReflexGame()
 
     public static func CreateReflexGame() -> ReflexGameModel<Circle>
     {
-        return ReflexGameModel<Circle>()
+        return ReflexGameModel<Circle>(score: 4){
+            return Circle(endAngle: Angle(degrees: 360))
+        }
     }
-
 
     var score : Int{
         return circleModel.score
     }
  
-    func clicked(_ circle: ReflexGameModel<Circle>.Circle){
+    func clicked(_ circle: ReflexGameModel<Circle>.GameElement){
         withAnimation()
         {
             circleModel.clicked(circle)
         }
     }
-
 }
-

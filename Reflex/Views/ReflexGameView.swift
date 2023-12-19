@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ReflexGameView: View {
-
-    
     private var score : some View{
         Text("Score: 0")
             .animation(nil)
     }
+    
     private var timer : some View{
         Text("Timer: 30")
             .animation(nil)
