@@ -14,10 +14,11 @@
 		3F1682282B287EC0001B0D01 /* ReflexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682272B287EC0001B0D01 /* ReflexTests.swift */; };
 		3F1682322B287EC0001B0D01 /* ReflexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682312B287EC0001B0D01 /* ReflexUITests.swift */; };
 		3F1682342B287EC0001B0D01 /* ReflexUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682332B287EC0001B0D01 /* ReflexUITestsLaunchTests.swift */; };
-		3F1682452B2881BA001B0D01 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682442B2881BA001B0D01 /* Circle.swift */; };
 		3F1682472B288490001B0D01 /* ReflexGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682462B288490001B0D01 /* ReflexGameModel.swift */; };
 		3F1682492B2886C9001B0D01 /* ReflexGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682482B2886C9001B0D01 /* ReflexGameView.swift */; };
 		3F16824B2B2886D6001B0D01 /* ReflexGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16824A2B2886D6001B0D01 /* ReflexGameViewModel.swift */; };
+		4AADBEEA2B3B656B002127CA /* circleTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AADBEE92B3B656B002127CA /* circleTarget.swift */; };
+		4AD7DC222B3F3D9200825BED /* circlePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7DC212B3F3D9200825BED /* circlePlaceholder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +49,11 @@
 		3F16822D2B287EC0001B0D01 /* ReflexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReflexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1682312B287EC0001B0D01 /* ReflexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexUITests.swift; sourceTree = "<group>"; };
 		3F1682332B287EC0001B0D01 /* ReflexUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3F1682442B2881BA001B0D01 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		3F1682462B288490001B0D01 /* ReflexGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameModel.swift; sourceTree = "<group>"; };
 		3F1682482B2886C9001B0D01 /* ReflexGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameView.swift; sourceTree = "<group>"; };
 		3F16824A2B2886D6001B0D01 /* ReflexGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameViewModel.swift; sourceTree = "<group>"; };
+		4AADBEE92B3B656B002127CA /* circleTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = circleTarget.swift; sourceTree = "<group>"; };
+		4AD7DC212B3F3D9200825BED /* circlePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = circlePlaceholder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				3F1682482B2886C9001B0D01 /* ReflexGameView.swift */,
+				4AADBEE92B3B656B002127CA /* circleTarget.swift */,
+				4AD7DC212B3F3D9200825BED /* circlePlaceholder.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,7 +170,6 @@
 		3F1682432B288171001B0D01 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3F1682442B2881BA001B0D01 /* Circle.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -301,12 +304,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AD7DC222B3F3D9200825BED /* circlePlaceholder.swift in Sources */,
+				4AADBEEA2B3B656B002127CA /* circleTarget.swift in Sources */,
 				3F1682192B287EBF001B0D01 /* ContentView.swift in Sources */,
 				3F1682492B2886C9001B0D01 /* ReflexGameView.swift in Sources */,
 				3F1682472B288490001B0D01 /* ReflexGameModel.swift in Sources */,
 				3F1682172B287EBF001B0D01 /* ReflexApp.swift in Sources */,
 				3F16824B2B2886D6001B0D01 /* ReflexGameViewModel.swift in Sources */,
-				3F1682452B2881BA001B0D01 /* Circle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

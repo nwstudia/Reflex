@@ -7,22 +7,20 @@
 import Foundation
 import SwiftUI
 
-struct ReflexGameModel<GameElementContent : Shape>
+struct ReflexGameModel
 {
     private(set) var circle : Array<GameElement>
     private(set) var score : Int
     
-    init(score: Int, circleContentFactory: ()->
-         GameElementContent) {
+    init(score: Int) {
         circle=[]
         
         self.score = score
-        let content = circleContentFactory()
         
         circle.append(
-            GameElement(color: .green, size: 4, isSafe: true, content: content, id: "1"))
+            GameElement(color: .green, size: 4, isSafe: true, id: "1"))
         circle.append(
-            GameElement(color: .red, size: 4,isSafe: false, content: content, id: "2"))
+            GameElement(color: .red, size: 4,isSafe: false, id: "2"))
         
     }
     
@@ -39,7 +37,6 @@ struct ReflexGameModel<GameElementContent : Shape>
         let color : Color
         let size : CGFloat
         let isSafe : Bool
-        let content : GameElementContent
         var id : String
     }
     
