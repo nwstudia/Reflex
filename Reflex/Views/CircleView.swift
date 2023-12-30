@@ -28,10 +28,10 @@ struct CircleView: View {
                               
                            }
                        }
-                       .modifier(Dispersion(viewModel: reflexGameViewModel))
+                       .modifier(DispersionModifier(viewModel: reflexGameViewModel))
     }
 }
 
 #Preview {
-    CircleView(reflexGameViewModel: ReflexGameViewModel())
+    return CircleView(reflexGameViewModel: ReflexGameViewModel())
 }

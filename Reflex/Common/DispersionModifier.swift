@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Dispersion: ViewModifier {
+struct DispersionModifier: ViewModifier {
     @ObservedObject var viewModel: ReflexGameViewModel
     
     func body(content: Content) -> some View {

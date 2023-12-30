@@ -17,7 +17,7 @@
 		3F1682472B288490001B0D01 /* ReflexGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682462B288490001B0D01 /* ReflexGameModel.swift */; };
 		3F1682492B2886C9001B0D01 /* ReflexGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1682482B2886C9001B0D01 /* ReflexGameView.swift */; };
 		3F16824B2B2886D6001B0D01 /* ReflexGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16824A2B2886D6001B0D01 /* ReflexGameViewModel.swift */; };
-		4A8DF87A2B40C2CA0007D8CA /* Dispersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DF8792B40C2CA0007D8CA /* Dispersion.swift */; };
+		4A8DF87A2B40C2CA0007D8CA /* DispersionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DF8792B40C2CA0007D8CA /* DispersionModifier.swift */; };
 		4A8DF87C2B40C2F10007D8CA /* CirclePositionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DF87B2B40C2F10007D8CA /* CirclePositionModifier.swift */; };
 		4A8DF87E2B40C6C20007D8CA /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DF87D2B40C6C20007D8CA /* CircleView.swift */; };
 /* End PBXBuildFile section */
@@ -53,7 +53,7 @@
 		3F1682462B288490001B0D01 /* ReflexGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameModel.swift; sourceTree = "<group>"; };
 		3F1682482B2886C9001B0D01 /* ReflexGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameView.swift; sourceTree = "<group>"; };
 		3F16824A2B2886D6001B0D01 /* ReflexGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexGameViewModel.swift; sourceTree = "<group>"; };
-		4A8DF8792B40C2CA0007D8CA /* Dispersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispersion.swift; sourceTree = "<group>"; };
+		4A8DF8792B40C2CA0007D8CA /* DispersionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispersionModifier.swift; sourceTree = "<group>"; };
 		4A8DF87B2B40C2F10007D8CA /* CirclePositionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePositionModifier.swift; sourceTree = "<group>"; };
 		4A8DF87D2B40C6C20007D8CA /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,7 +171,7 @@
 		3F1682432B288171001B0D01 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				4A8DF8792B40C2CA0007D8CA /* Dispersion.swift */,
+				4A8DF8792B40C2CA0007D8CA /* DispersionModifier.swift */,
 				4A8DF87B2B40C2F10007D8CA /* CirclePositionModifier.swift */,
 			);
 			path = Common;
@@ -308,7 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1682192B287EBF001B0D01 /* ContentView.swift in Sources */,
-				4A8DF87A2B40C2CA0007D8CA /* Dispersion.swift in Sources */,
+				4A8DF87A2B40C2CA0007D8CA /* DispersionModifier.swift in Sources */,
 				3F1682492B2886C9001B0D01 /* ReflexGameView.swift in Sources */,
 				3F1682472B288490001B0D01 /* ReflexGameModel.swift in Sources */,
 				4A8DF87E2B40C6C20007D8CA /* CircleView.swift in Sources */,
