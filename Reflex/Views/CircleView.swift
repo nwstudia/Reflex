@@ -11,7 +11,7 @@ struct CircleView: View {
     @ObservedObject var reflexGameViewModel: ReflexGameViewModel
     var body: some View {
         Circle()
-            .fill(.green)
+            .fill(reflexGameViewModel.circleColor)
             .frame(width: reflexGameViewModel.circleSize, height: reflexGameViewModel.circleSize)
             .position(reflexGameViewModel.circlePosition)
             .onTapGesture {

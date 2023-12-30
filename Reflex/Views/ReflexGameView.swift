@@ -28,7 +28,8 @@ struct ReflexGameView: View {
             .modifier(CirclePositionModifier(viewModel: reflexGameViewModel))
             .onAppear{
                 reflexGameViewModel.startGame()
-            }
+            }.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 3)
+            .padding(5)
     }
 
 

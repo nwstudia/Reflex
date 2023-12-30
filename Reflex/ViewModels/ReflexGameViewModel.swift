@@ -16,7 +16,7 @@ class ReflexGameViewModel : ObservableObject
     @Published var shouldDispersion: Bool = false
     @Published var dispersionDuration : Double = 0.2
     @Published var gameTimerValue: TimeInterval = 0
-    
+    @Published var circleColor : Color = .green;
     private var circleLifetimeTimer: Timer?
     
     private var gameTimer: Timer?
@@ -26,13 +26,13 @@ class ReflexGameViewModel : ObservableObject
         return ReflexGameModel(score: 4);
     }
 
-    
     let circleSize: CGFloat = 50
     func setProxySize(proxySize: CGSize){
         self.proxySize = proxySize
     }
     
     func generateRandomPosition() {
+        generateCircle();
         guard proxySize.width >= circleSize && proxySize.height >= circleSize else {
             return
         }
@@ -45,6 +45,17 @@ class ReflexGameViewModel : ObservableObject
 
         circlePosition = CGPoint(x: randomX, y: randomY)
     }
+    
+    func generateCircle()
+    {
+        if(shouldOccurWithProbability(10))
+        {
+            circleColor = .red
+        }else{
+            circleColor = .green
+        }
+    }
+    
     func addScore(){
         score += 1
     }
@@ -88,5 +99,9 @@ class ReflexGameViewModel : ObservableObject
         }
         startCircleLifetimeTimer()
     }
-
+    
+    private func shouldOccurWithProbability(_ probability: Int) -> Bool {
+        let randomValue = Int.random(in: 1...100)
+        return randomValue <= probability
+    }
 }
