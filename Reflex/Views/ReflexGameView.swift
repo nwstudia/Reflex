@@ -14,14 +14,22 @@ struct CirclePositionModifier: ViewModifier {
             .overlay(GeometryReader { proxy in
                 Color.clear
                     .onAppear {
-                        viewModel.setProxySize(proxySize: proxy.size)
-                        viewModel.generateRandomPosition()
+                        viewModel.initialSetup(proxySize: proxy.size)
                     }
                     .onChange(of: proxy.size) { _ in
-                        viewModel.setProxySize(proxySize: proxy.size)
-                        viewModel.generateRandomPosition()
+                        viewModel.initialSetup(proxySize: proxy.size)
                     }
             })
+    }
+}
+struct Glow: ViewModifier {
+    @ObservedObject var viewModel: ReflexGameViewModel
+    
+    func body(content: Content) -> some View {
+        withAnimation(.linear(duration: viewModel.throbDuration))
+        {
+            content
+        }.blur(radius:  viewModel.shouldThrob ? 100 : 1)
     }
 }
 
@@ -38,7 +46,7 @@ struct ReflexGameView: View {
 
     private var timerView: some View {
         Text("Timer: \(timeElapsed)").onReceive(timer) { _ in
-            print("timer fired")
+            
             timeElapsed = Int(Date().timeIntervalSince(startDate))
             if timeElapsed >= 5 {
                 startDate = Date()
@@ -50,12 +58,24 @@ struct ReflexGameView: View {
 
     private var gameBoard: some View {
         Circle()
+            .fill(.green)
             .frame(width: reflexGameViewModel.circleSize, height: reflexGameViewModel.circleSize)
             .position(reflexGameViewModel.circlePosition)
             .onTapGesture {
-                self.reflexGameViewModel.handleCircleTap()
-            }
-            .modifier(CirclePositionModifier(viewModel: reflexGameViewModel))
+                withAnimation(.linear(duration: reflexGameViewModel.throbDuration)) {
+                               self.reflexGameViewModel.shouldThrob = true
+                           }
+                           DispatchQueue.main.asyncAfter(deadline: .now() + reflexGameViewModel.throbDuration) {
+                               withAnimation(nil){
+                                   self.reflexGameViewModel.handleCircleTap()
+                                   self.reflexGameViewModel.shouldThrob = false
+                               }
+                              
+                           }
+                       }
+                       .modifier(Glow(viewModel: reflexGameViewModel))
+           
+         
     }
 
     var body: some View {
@@ -68,6 +88,7 @@ struct ReflexGameView: View {
             Spacer()
             gameBoard
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .modifier(CirclePositionModifier(viewModel: reflexGameViewModel))
             Spacer()
         }
     }
