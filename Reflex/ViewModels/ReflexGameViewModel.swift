@@ -13,8 +13,8 @@ class ReflexGameViewModel : ObservableObject
     @Published var circlePosition: CGPoint = .zero
     @Published var score: Int = 0
     @Published var proxySize: CGSize = .zero
-    @Published var shouldThrob: Bool = false
-    @Published var throbDuration : Double = 0.2
+    @Published var shouldDispersion: Bool = false
+    @Published var dispersionDuration : Double = 0.2
     
     private var timer: Timer?
     
@@ -42,10 +42,11 @@ class ReflexGameViewModel : ObservableObject
 
         circlePosition = CGPoint(x: randomX, y: randomY)
     }
-
-    func handleCircleTap() {
-        self.shouldThrob=true;
+    func addScore(){
         score += 1
+    }
+    func handleCircleTap() {
+        self.shouldDispersion=true;
         resetTimer(false)
         generateRandomPosition()
     }
@@ -62,7 +63,7 @@ class ReflexGameViewModel : ObservableObject
             self?.resetTimer(true);
         }
     }
-
+    
     private func resetTimer(_ isUserFault : Bool) {
         timer?.invalidate()
         if(isUserFault)
