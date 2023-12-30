@@ -15,9 +15,11 @@ class ReflexGameViewModel : ObservableObject
     @Published var proxySize: CGSize = .zero
     @Published var shouldDispersion: Bool = false
     @Published var dispersionDuration : Double = 0.2
+    @Published var gameTimerValue: TimeInterval = 0
     
     private var circleLifetimeTimer: Timer?
-    @Published var gameTimer: Timer?
+    
+    private var gameTimer: Timer?
     
     public static func CreateReflexGame() -> ReflexGameModel
     {
@@ -46,19 +48,25 @@ class ReflexGameViewModel : ObservableObject
     func addScore(){
         score += 1
     }
+    
     func handleCircleTap() {
         self.shouldDispersion=true;
         resetCircleLifetimeTimer(false)
         generateRandomPosition()
     }
+    
     func startGame()
     {
-        
+        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            self?.gameTimerValue += 1
+        }
     }
+    
     func endGame()
     {
-        
+       gameTimer?.invalidate()
     }
+    
     func initialSetup(proxySize: CGSize) {
         setProxySize(proxySize: proxySize)
         generateRandomPosition()
