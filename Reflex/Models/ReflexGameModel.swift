@@ -9,35 +9,47 @@ import SwiftUI
 
 struct ReflexGameModel
 {
-    private(set) var circle : Array<GameElement>
-    private(set) var score : Int
+    private(set) var score: Int = 0
+    private(set) var proxySize: CGSize = .zero
+    private(set) var shouldDispersion: Bool = false
+    private(set) var dispersionDuration : Double = 0.2
+    private(set) var gameTimerValue: TimeInterval = 0
+    private(set) var circleTarget = CircleTarget(color: .green, size: CGFloat(50), isSafe: true, position: .zero)
     
-    init(score: Int) {
-        circle=[]
-        
-        self.score = score
-        
-        circle.append(
-            GameElement(color: .green, size: 4, isSafe: true, id: "1"))
-        circle.append(
-            GameElement(color: .red, size: 4,isSafe: false, id: "2"))
-        
+    mutating func setProxySize(_ size : CGSize)
+    {
+        self.proxySize = size;
     }
     
-    mutating func clicked(_ circle: GameElement){
-        if(circle.isSafe)
-        {
-            score+=1
-        }else{
-            //end game;
-        }
+    mutating func setPosition(_ position : CGPoint)
+    {
+        circleTarget.position = position;
+    }
+    mutating func addGameTime(_ time : TimeInterval){
+        gameTimerValue += time
+    }
+    mutating func setFriendliness(_ isFriendly : Bool)
+    {
+        circleTarget.isSafe = isFriendly;
+        circleTarget.color = isFriendly ? .green : .red;
+    }
+    mutating func setDispresion(_ shouldDispresion : Bool)
+    {
+        self.shouldDispersion = shouldDispresion
+    }
+    mutating func addScore(_ howMany : Int){
+        score += howMany;
     }
     
-    struct GameElement : Identifiable{
-        let color : Color
+    mutating func minusScore(_ howMany : Int){
+        score -= howMany;
+    }
+    
+    struct CircleTarget {
+        var color : Color
         let size : CGFloat
-        let isSafe : Bool
-        var id : String
+        var isSafe : Bool
+        var position: CGPoint
     }
     
 }

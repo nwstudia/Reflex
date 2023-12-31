@@ -11,19 +11,19 @@ struct CircleView: View {
     @ObservedObject var reflexGameViewModel: ReflexGameViewModel
     var body: some View {
         Circle()
-            .fill(reflexGameViewModel.circleColor)
-            .frame(width: reflexGameViewModel.circleSize, height: reflexGameViewModel.circleSize)
-            .position(reflexGameViewModel.circlePosition)
+            .fill(reflexGameViewModel.gameModel.circleTarget.color)
+            .frame(width: reflexGameViewModel.circleSize, height: reflexGameViewModel.gameModel.circleTarget.size)
+            .position(reflexGameViewModel.gameModel.circleTarget.position)
             .onTapGesture {
                 self.reflexGameViewModel.addScore()
-                withAnimation(.linear(duration: reflexGameViewModel.dispersionDuration)) {
-                            self.reflexGameViewModel.shouldDispersion = true
+                withAnimation(.linear(duration: reflexGameViewModel.gameModel.dispersionDuration)) {
+                    reflexGameViewModel.setDispresion(true)
                            }
                 
-                           DispatchQueue.main.asyncAfter(deadline: .now() + reflexGameViewModel.dispersionDuration) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + reflexGameViewModel.gameModel.dispersionDuration) {
                                withAnimation(nil){
                                    self.reflexGameViewModel.handleCircleTap()
-                                   self.reflexGameViewModel.shouldDispersion = false
+                                   self.reflexGameViewModel.setDispresion(false)
                                }
                               
                            }

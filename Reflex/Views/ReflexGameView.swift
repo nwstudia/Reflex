@@ -12,12 +12,12 @@ struct ReflexGameView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private var scoreView: some View {
-            Text("Punkty: \(reflexGameViewModel.score)")
+        Text("Punkty: \(reflexGameViewModel.gameModel.score)")
                 .padding()
     }
 
     private var timerView: some View {
-        Text("Timer: \(reflexGameViewModel.gameTimerValue, specifier: "%.0f") s")
+        Text("Timer: \(reflexGameViewModel.gameModel.gameTimerValue, specifier: "%.0f") s")
                        .font(.largeTitle)
                        .padding()
     }
@@ -29,7 +29,6 @@ struct ReflexGameView: View {
             .onAppear{
                 reflexGameViewModel.startGame()
             }.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 3)
-            .padding(5)
     }
 
 
