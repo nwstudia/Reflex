@@ -11,10 +11,10 @@ struct DispersionModifier: ViewModifier {
     @ObservedObject var viewModel: ReflexGameViewModel
     
     func body(content: Content) -> some View {
-        withAnimation(.linear(duration: viewModel.gameModel.dispersionDuration))
+        withAnimation(.linear(duration: viewModel.gameModel.circleTarget.dispersionDuration))
         {
             content
-        }.blur(radius:  viewModel.gameModel.shouldDispersion ? 100 : 1)
+        }.blur(radius:  viewModel.gameModel.circleTarget.shouldDispersion ? 100 : 1)
     }
 }
 

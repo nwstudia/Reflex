@@ -17,11 +17,15 @@ struct ReflexGameView: View {
     }
 
     private var timerView: some View {
-        Text("Timer: \(reflexGameViewModel.gameModel.gameTimerValue, specifier: "%.0f") s")
+        Text("Czas: \n  \(reflexGameViewModel.gameModel.gameTimerValue, specifier: "%.0f") s")
                        .font(.largeTitle)
                        .padding()
     }
-
+    private var playerLives : some View {
+        Text("Zycia gracza: \(reflexGameViewModel.gameModel.playerLives) /3")
+                       .padding()
+    }
+    
     private var gameBoard: some View {
         CircleView(reflexGameViewModel: reflexGameViewModel)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -36,8 +40,8 @@ struct ReflexGameView: View {
         VStack {
             HStack {
                 timerView
-                Spacer()
                 scoreView
+                playerLives
             }
             Spacer()
             gameBoard

@@ -17,7 +17,12 @@ class ReflexGameViewModel : ObservableObject
     
     public static func CreateReflexGame() -> ReflexGameModel
     {
-        return ReflexGameModel(score: 4);
+        return ReflexGameModel(
+            score: 0,
+            proxySize: .zero,
+            gameTimerValue: 0,
+            circleTarget: ReflexGameModel.CircleTarget(color: .green, size: CGFloat(50), isSafe: true, position: .zero, shouldDispersion: false, dispersionDuration: 0.2),
+            playerLives: 3);
     }
 
     let circleSize: CGFloat = 50
@@ -26,7 +31,7 @@ class ReflexGameViewModel : ObservableObject
     }
     
     func generateRandomPosition() {
-        generateCircle();
+        getTargetFriendliness();
         guard gameModel.proxySize.width >= circleSize && gameModel.proxySize.height >= circleSize else {
             return
         }
@@ -40,9 +45,9 @@ class ReflexGameViewModel : ObservableObject
         gameModel.setPosition(CGPoint(x: randomX, y: randomY))
     }
     
-    func generateCircle()
+    func getTargetFriendliness()
     {
-        if(shouldOccurWithProbability(10))
+        if(shouldOccurWithProbability(20))
         {
             gameModel.setFriendliness(false)
         }else{
@@ -59,10 +64,23 @@ class ReflexGameViewModel : ObservableObject
         gameModel.addScore(1)
     }
     
+    func takeLife(){
+        gameModel.minusLives(1)
+        
+        if(gameModel.playerLives <= 0)
+        {
+            endGame();
+        }
+    }
+    
     func handleCircleTap() {
         gameModel.setDispresion(true)
-        resetCircleLifetimeTimer(false)
+        if(gameModel.circleTarget.isSafe == false)
+        {
+            takeLife()
+        }
         generateRandomPosition()
+        resetCircleLifetimeTimer(isUserFault: false, isSafe: gameModel.circleTarget.isSafe)
     }
     
     func startGame()
@@ -74,6 +92,7 @@ class ReflexGameViewModel : ObservableObject
     
     func endGame()
     {
+        print("Koniec gry")
        gameTimer?.invalidate()
     }
     
@@ -84,17 +103,19 @@ class ReflexGameViewModel : ObservableObject
     }
 
     private func startCircleLifetimeTimer() {
+        let isSafe = gameModel.circleTarget.isSafe; //avoid clousers
         circleLifetimeTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [weak self] _ in
             self?.generateRandomPosition()
-            self?.resetCircleLifetimeTimer(true);
+            self?.resetCircleLifetimeTimer(isUserFault: true, isSafe: isSafe);
         }
     }
     
-    private func resetCircleLifetimeTimer(_ isUserFault : Bool) {
+    private func resetCircleLifetimeTimer(isUserFault : Bool, isSafe:Bool) {
         circleLifetimeTimer?.invalidate()
-        if(isUserFault)
+        if(isUserFault == true && isSafe == true)
         {
             gameModel.minusScore(1)
+            takeLife()
         }
         startCircleLifetimeTimer()
     }

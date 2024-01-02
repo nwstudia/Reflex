@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CircleView: View {
     @ObservedObject var reflexGameViewModel: ReflexGameViewModel
+    
     var body: some View {
         Circle()
             .fill(reflexGameViewModel.gameModel.circleTarget.color)
@@ -16,11 +17,11 @@ struct CircleView: View {
             .position(reflexGameViewModel.gameModel.circleTarget.position)
             .onTapGesture {
                 self.reflexGameViewModel.addScore()
-                withAnimation(.linear(duration: reflexGameViewModel.gameModel.dispersionDuration)) {
+                withAnimation(.linear(duration: reflexGameViewModel.gameModel.circleTarget.dispersionDuration)) {
                     reflexGameViewModel.setDispresion(true)
                            }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + reflexGameViewModel.gameModel.dispersionDuration) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + reflexGameViewModel.gameModel.circleTarget.dispersionDuration) {
                                withAnimation(nil){
                                    self.reflexGameViewModel.handleCircleTap()
                                    self.reflexGameViewModel.setDispresion(false)

@@ -9,12 +9,20 @@ import SwiftUI
 
 struct ReflexGameModel
 {
-    private(set) var score: Int = 0
-    private(set) var proxySize: CGSize = .zero
-    private(set) var shouldDispersion: Bool = false
-    private(set) var dispersionDuration : Double = 0.2
-    private(set) var gameTimerValue: TimeInterval = 0
-    private(set) var circleTarget = CircleTarget(color: .green, size: CGFloat(50), isSafe: true, position: .zero)
+    private(set) var score: Int
+    private(set) var proxySize: CGSize
+    private(set) var gameTimerValue: TimeInterval
+    private(set) var circleTarget : CircleTarget
+    private(set) var playerLives : Int
+    
+    init(score : Int, proxySize : CGSize, gameTimerValue : TimeInterval, circleTarget : CircleTarget, playerLives : Int)
+    {
+        self.score = score
+        self.proxySize = proxySize
+        self.gameTimerValue = gameTimerValue
+        self.circleTarget = circleTarget
+        self.playerLives = playerLives
+    }
     
     mutating func setProxySize(_ size : CGSize)
     {
@@ -35,7 +43,7 @@ struct ReflexGameModel
     }
     mutating func setDispresion(_ shouldDispresion : Bool)
     {
-        self.shouldDispersion = shouldDispresion
+        self.circleTarget.shouldDispersion = shouldDispresion
     }
     mutating func addScore(_ howMany : Int){
         score += howMany;
@@ -44,12 +52,16 @@ struct ReflexGameModel
     mutating func minusScore(_ howMany : Int){
         score -= howMany;
     }
-    
+    mutating func minusLives(_ howMany : Int){
+        playerLives -= howMany;
+    }
     struct CircleTarget {
         var color : Color
         let size : CGFloat
         var isSafe : Bool
         var position: CGPoint
+        var shouldDispersion: Bool
+        var dispersionDuration : Double
     }
     
 }
