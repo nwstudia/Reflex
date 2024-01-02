@@ -14,14 +14,16 @@ struct ReflexGameModel
     private(set) var gameTimerValue: TimeInterval
     private(set) var circleTarget : CircleTarget
     private(set) var playerLives : Int
+    private(set) var timeToClick : TimeInterval
     
-    init(score : Int, proxySize : CGSize, gameTimerValue : TimeInterval, circleTarget : CircleTarget, playerLives : Int)
+    init(score : Int, proxySize : CGSize, gameTimerValue : TimeInterval, circleTarget : CircleTarget, playerLives : Int, timeToClick : TimeInterval)
     {
         self.score = score
         self.proxySize = proxySize
         self.gameTimerValue = gameTimerValue
         self.circleTarget = circleTarget
         self.playerLives = playerLives
+        self.timeToClick = timeToClick
     }
     
     mutating func setProxySize(_ size : CGSize)
@@ -33,18 +35,22 @@ struct ReflexGameModel
     {
         circleTarget.position = position;
     }
+    
     mutating func addGameTime(_ time : TimeInterval){
         gameTimerValue += time
     }
+    
     mutating func setFriendliness(_ isFriendly : Bool)
     {
         circleTarget.isSafe = isFriendly;
         circleTarget.color = isFriendly ? .green : .red;
     }
+    
     mutating func setDispresion(_ shouldDispresion : Bool)
     {
         self.circleTarget.shouldDispersion = shouldDispresion
     }
+    
     mutating func addScore(_ howMany : Int){
         score += howMany;
     }
@@ -52,12 +58,19 @@ struct ReflexGameModel
     mutating func minusScore(_ howMany : Int){
         score -= howMany;
     }
+    
     mutating func minusLives(_ howMany : Int){
         playerLives -= howMany;
     }
-    struct CircleTarget {
+    
+    mutating func CreateNewCircleTarget(color : Color, isSafe: Bool, size : CGFloat, position : CGPoint, dispersionDuration : Double) {
+        self.circleTarget = CircleTarget(id:  UUID().uuidString, color: color, size: size, isSafe: isSafe, position: position, shouldDispersion: false, dispersionDuration: dispersionDuration)
+    }
+    
+    struct CircleTarget : Identifiable{
+        var id: String
         var color : Color
-        let size : CGFloat
+        var size : CGFloat
         var isSafe : Bool
         var position: CGPoint
         var shouldDispersion: Bool
