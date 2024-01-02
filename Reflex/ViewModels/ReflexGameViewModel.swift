@@ -45,6 +45,7 @@ class ReflexGameViewModel : ObservableObject
             playerFault();
         }
     }
+    
     private func playerFault()
     {
         gameModel.minusScore(1)
@@ -61,7 +62,7 @@ class ReflexGameViewModel : ObservableObject
     }
  
     
-    private func generateRandomPosition2() -> CGPoint {
+    private func generateRandomPosition() -> CGPoint {
         guard gameModel.proxySize.width >= circleSize && gameModel.proxySize.height >= circleSize else {
             return .zero
         }
@@ -75,27 +76,22 @@ class ReflexGameViewModel : ObservableObject
         return CGPoint(x: randomX, y: randomY);
     }
     
-    func handleCircleTap2() {
-        print(gameModel.circleTarget.id)
-        print(lastClicked == gameModel.circleTarget.id)
-        print(lastClicked)
+    func handleCircleTap() {
         if(lastClicked == gameModel.circleTarget.id)
         {
             return;
         }
         lastClicked = gameModel.circleTarget.id;
-        gameModel.setDispresion(true)
-        //setRandomPosition()
         CreateNewCircleTarget()
         resetCircleLifetimeTimer(isUserFault: false, isSafe: gameModel.circleTarget.isSafe)
-   
     }
+    
     private func CreateNewCircleTarget(){
         if(shouldOccurWithProbability(20))
         {
-            gameModel.CreateNewCircleTarget(color: .red, isSafe: false, size: 50, position: generateRandomPosition2(), dispersionDuration: 3)
+            gameModel.CreateNewCircleTarget(color: .red, isSafe: false, size: 50, position: generateRandomPosition(), dispersionDuration: 3)
         }else{
-            gameModel.CreateNewCircleTarget(color: .green, isSafe: true, size: 50, position: generateRandomPosition2(), dispersionDuration: 3)
+            gameModel.CreateNewCircleTarget(color: .green, isSafe: true, size: 50, position: generateRandomPosition(), dispersionDuration: 3)
         }
     }
     func startGame()
@@ -113,9 +109,7 @@ class ReflexGameViewModel : ObservableObject
     
     func initialSetup(proxySize: CGSize) {
         setProxySize(proxySize: proxySize)
-        
         CreateNewCircleTarget()
-        //setRandomPosition()
         startCircleLifetimeTimer()
     }
 
@@ -123,7 +117,6 @@ class ReflexGameViewModel : ObservableObject
         let isSafe = gameModel.circleTarget.isSafe; //avoid clousers
         circleLifetimeTimer = Timer.scheduledTimer(withTimeInterval: gameModel.timeToClick, repeats: false) { [weak self] _ in
             self?.CreateNewCircleTarget()
-            //self?.setRandomPosition()
             self?.resetCircleLifetimeTimer(isUserFault: true, isSafe: isSafe);
         }
     }

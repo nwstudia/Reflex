@@ -9,8 +9,7 @@ import SwiftUI
 
 struct CircleView: View {
     @ObservedObject var reflexGameViewModel: ReflexGameViewModel
-    
-    var body: some View {
+    private var circleView: some View {
         Circle()
             .fill(reflexGameViewModel.gameModel.circleTarget.color)
             .frame(width: reflexGameViewModel.circleSize, height: reflexGameViewModel.gameModel.circleTarget.size)
@@ -18,21 +17,23 @@ struct CircleView: View {
             .onTapGesture {
                 if(!self.reflexGameViewModel.gameModel.circleTarget.shouldDispersion)
                 {
-                    
                     self.reflexGameViewModel.calculateScore()
                     withAnimation(.linear(duration: reflexGameViewModel.gameModel.circleTarget.dispersionDuration)) {
                         reflexGameViewModel.setDispresion(true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + reflexGameViewModel.gameModel.circleTarget.dispersionDuration) {
-                            withAnimation(nil){
-                                self.reflexGameViewModel.handleCircleTap2()
-                                
-                            }
-                            self.reflexGameViewModel.setDispresion(false)
+                    }
+                    Timer.scheduledTimer(withTimeInterval: reflexGameViewModel.gameModel.circleTarget.dispersionDuration, repeats: false) { timer in
+                        withAnimation(nil) {
+                            self.reflexGameViewModel.handleCircleTap()
                         }
+                       // self.reflexGameViewModel.setDispresion(false)
                     }
                 }
                        }
                       .modifier(DispersionModifier(viewModel: reflexGameViewModel))
+    }
+    
+    var body: some View {
+        circleView
     }
 }
 
