@@ -13,9 +13,10 @@ struct DispersionModifier: ViewModifier {
     func body(content: Content) -> some View {
         withAnimation(.linear(duration: viewModel.gameModel.circleTarget.dispersionDuration))
         {
-            content
-        }.blur(radius:  viewModel.gameModel.circleTarget.shouldDispersion ? 100 : 1)
-    }
+            content.opacity(viewModel.gameModel.circleTarget.shouldDispersion ? 0 : 1)
+
+        }.blur(radius:  viewModel.gameModel.circleTarget.shouldDispersion ? 20 : 1)
+       }
 }
 
 

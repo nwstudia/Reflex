@@ -61,7 +61,6 @@ class ReflexGameViewModel : ObservableObject
         }
     }
  
-    
     private func generateRandomPosition() -> CGPoint {
         guard gameModel.proxySize.width >= circleSize && gameModel.proxySize.height >= circleSize else {
             return .zero
@@ -94,6 +93,7 @@ class ReflexGameViewModel : ObservableObject
             gameModel.CreateNewCircleTarget(color: .green, isSafe: true, size: 50, position: generateRandomPosition(), dispersionDuration: 3)
         }
     }
+    
     func startGame()
     {
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
