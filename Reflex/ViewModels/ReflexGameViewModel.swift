@@ -10,11 +10,15 @@ import SwiftUI
 class ReflexGameViewModel : ObservableObject
 {
     @Published var gameModel : ReflexGameModel = CreateReflexGame()
-
+    @Published var showAlert : Bool = true;
     private var circleLifetimeTimer: Timer?
     private var gameTimer: Timer?
     private var dispresionDuration = 5
     private var lastClicked : String = ""
+    
+    public func getIsGameInProgress() -> Bool {
+        return gameModel.isGameEnded;
+    }
     
     public static func CreateReflexGame() -> ReflexGameModel
     {
@@ -22,8 +26,8 @@ class ReflexGameViewModel : ObservableObject
             score: 0,
             proxySize: .zero,
             gameTimerValue: 0,
-            circleTarget: ReflexGameModel.CircleTarget(id: UUID().uuidString, color: .green, size: CGFloat(50), isSafe: true, position: .zero, shouldDispersion: false, dispersionDuration: 5),
-            playerLives: 3, timeToClick: 8);
+            circleTarget: ReflexGameModel.CircleTarget(id: UUID().uuidString, color: .green, size: CGFloat(50), isSafe: true, position: .zero, shouldDispersion: false, dispersionDuration: 0.2, timeToClick: 3),
+            playerLives: 3, timeToClick: 3);
     }
 
     let circleSize: CGFloat = 50
@@ -84,27 +88,36 @@ class ReflexGameViewModel : ObservableObject
         CreateNewCircleTarget()
         resetCircleLifetimeTimer(isUserFault: false, isSafe: gameModel.circleTarget.isSafe)
     }
-    
+
     private func CreateNewCircleTarget(){
         if(shouldOccurWithProbability(20))
         {
-            gameModel.CreateNewCircleTarget(color: .red, isSafe: false, size: 50, position: generateRandomPosition(), dispersionDuration: 3)
+            gameModel.CreateNewCircleTarget(color: .red, isSafe: false, size: 50, position: generateRandomPosition(), dispersionDuration: 0.2, timeToClick: 3)
         }else{
-            gameModel.CreateNewCircleTarget(color: .green, isSafe: true, size: 50, position: generateRandomPosition(), dispersionDuration: 3)
+            gameModel.CreateNewCircleTarget(color: .green, isSafe: true, size: 50, position: generateRandomPosition(), dispersionDuration: 0.2, timeToClick: 3)
         }
     }
-    
+    func reset() {
+        gameModel.setScore(0)
+        gameModel.setGameTimerValue(0)
+        gameModel.setPlayerLives(3)
+        gameModel.setIsGameEnded(false);
+    }
     func startGame()
     {
+        reset();
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             self?.gameModel.addGameTime(1)
         }
+        CreateNewCircleTarget()
+        startCircleLifetimeTimer()
     }
     
     func endGame()
     {
-        print("Koniec gry")
-       gameTimer?.invalidate()
+        gameTimer?.invalidate()
+        circleLifetimeTimer?.invalidate()
+        gameModel.setIsGameEnded(true);
     }
     
     func initialSetup(proxySize: CGSize) {
@@ -115,9 +128,11 @@ class ReflexGameViewModel : ObservableObject
 
     private func startCircleLifetimeTimer() {
         let isSafe = gameModel.circleTarget.isSafe; //avoid clousers
-        circleLifetimeTimer = Timer.scheduledTimer(withTimeInterval: gameModel.timeToClick, repeats: false) { [weak self] _ in
-            self?.CreateNewCircleTarget()
-            self?.resetCircleLifetimeTimer(isUserFault: true, isSafe: isSafe);
+        self.circleLifetimeTimer = Timer.scheduledTimer(withTimeInterval: gameModel.timeToClick, repeats: false) { [weak self] _ in
+            if let isGameEnded = self?.gameModel.isGameEnded, !isGameEnded {
+                   self?.CreateNewCircleTarget()
+                   self?.resetCircleLifetimeTimer(isUserFault: true, isSafe: isSafe)
+               }
         }
     }
     

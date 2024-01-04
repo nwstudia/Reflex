@@ -15,6 +15,7 @@ struct ReflexGameModel
     private(set) var circleTarget : CircleTarget
     private(set) var playerLives : Int
     private(set) var timeToClick : TimeInterval
+    var isGameEnded : Bool = false
     
     init(score : Int, proxySize : CGSize, gameTimerValue : TimeInterval, circleTarget : CircleTarget, playerLives : Int, timeToClick : TimeInterval)
     {
@@ -25,7 +26,21 @@ struct ReflexGameModel
         self.playerLives = playerLives
         self.timeToClick = timeToClick
     }
-    
+    mutating func setIsGameEnded(_ isGameEnded : Bool){
+        self.isGameEnded = isGameEnded
+    }
+    mutating func setPlayerLives(_ playerLives : Int)
+    {
+        self.playerLives=playerLives;
+    }
+    mutating func setGameTimerValue(_ gameTimerValue : TimeInterval)
+    {
+        self.gameTimerValue = gameTimerValue
+    }
+    mutating func setScore(_ score : Int)
+    {
+        self.score = score
+    }
     mutating func setProxySize(_ size : CGSize)
     {
         self.proxySize = size;
@@ -63,8 +78,8 @@ struct ReflexGameModel
         playerLives -= howMany;
     }
     
-    mutating func CreateNewCircleTarget(color : Color, isSafe: Bool, size : CGFloat, position : CGPoint, dispersionDuration : Double) {
-        self.circleTarget = CircleTarget(id:  UUID().uuidString, color: color, size: size, isSafe: isSafe, position: position, shouldDispersion: false, dispersionDuration: dispersionDuration)
+    mutating func CreateNewCircleTarget(color : Color, isSafe: Bool, size : CGFloat, position : CGPoint, dispersionDuration : Double, timeToClick : TimeInterval) {
+        self.circleTarget = CircleTarget(id:  UUID().uuidString, color: color, size: size, isSafe: isSafe, position: position, shouldDispersion: false, dispersionDuration: dispersionDuration, timeToClick: timeToClick)
     }
     
     struct CircleTarget : Identifiable{
@@ -75,6 +90,7 @@ struct ReflexGameModel
         var position: CGPoint
         var shouldDispersion: Bool
         var dispersionDuration : Double
+        var timeToClick : TimeInterval
     }
     
 }

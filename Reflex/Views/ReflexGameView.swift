@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReflexGameView: View {
     @StateObject var reflexGameViewModel: ReflexGameViewModel = ReflexGameViewModel()
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+   
 
     private var scoreView: some View {
         Text("Punkty: \(reflexGameViewModel.gameModel.score)")
@@ -25,7 +25,7 @@ struct ReflexGameView: View {
         Text("Zycia gracza: \(reflexGameViewModel.gameModel.playerLives) /3")
                        .padding()
     }
-    
+   
     private var gameBoard: some View {
         CircleView(reflexGameViewModel: reflexGameViewModel)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -35,7 +35,6 @@ struct ReflexGameView: View {
             }.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 3)
     }
 
-
     var body: some View {
         VStack {
             HStack {
@@ -44,12 +43,20 @@ struct ReflexGameView: View {
                 playerLives
             }
             Spacer()
-            gameBoard
+            gameBoard   
+                .alert(isPresented: $reflexGameViewModel.gameModel.isGameEnded) {
+                Alert(
+                    title: Text("Gra skonczona"),
+                    message: Text("Uzyskales \(reflexGameViewModel.gameModel.score) punktow w czasie \(reflexGameViewModel.gameModel.gameTimerValue, specifier: "%.0f") s"),
+                    dismissButton: .default(Text("Zagraj ponownie")) {
+                        reflexGameViewModel.startGame()
+                    }
+                )
+            }
             Spacer()
         }
     }
 }
-
 
 #Preview {
     ReflexGameView()
