@@ -19,7 +19,7 @@ struct CircleView: View {
                 if(!self.reflexGameViewModel.gameModel.circleTarget.shouldDispersion)
                 {
                     self.reflexGameViewModel.calculateScore()
-                   
+                    self.reflexGameViewModel.stopCircleLifetimeTimer()
                     withAnimation(.linear(duration: reflexGameViewModel.gameModel.circleTarget.dispersionDuration)) {
                         reflexGameViewModel.setDispresion(true)
                     }

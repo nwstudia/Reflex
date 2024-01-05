@@ -14,17 +14,15 @@ struct ReflexGameModel
     private(set) var gameTimerValue: TimeInterval
     private(set) var circleTarget : CircleTarget
     private(set) var playerLives : Int
-    private(set) var timeToClick : TimeInterval
     var isGameEnded : Bool = false
     
-    init(score : Int, proxySize : CGSize, gameTimerValue : TimeInterval, circleTarget : CircleTarget, playerLives : Int, timeToClick : TimeInterval)
+    init(score : Int, proxySize : CGSize, gameTimerValue : TimeInterval, circleTarget : CircleTarget, playerLives : Int)
     {
         self.score = score
         self.proxySize = proxySize
         self.gameTimerValue = gameTimerValue
         self.circleTarget = circleTarget
         self.playerLives = playerLives
-        self.timeToClick = timeToClick
     }
     mutating func setIsGameEnded(_ isGameEnded : Bool){
         self.isGameEnded = isGameEnded

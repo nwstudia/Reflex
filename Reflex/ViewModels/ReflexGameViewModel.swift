@@ -26,8 +26,8 @@ class ReflexGameViewModel : ObservableObject
             score: 0,
             proxySize: .zero,
             gameTimerValue: 0,
-            circleTarget: ReflexGameModel.CircleTarget(id: UUID().uuidString, color: .green, size: CGFloat(50), isSafe: true, position: .zero, shouldDispersion: false, dispersionDuration: 0.2, timeToClick: 3),
-            playerLives: 3, timeToClick: 3);
+            circleTarget: ReflexGameModel.CircleTarget(id: UUID().uuidString, color: .green, size: CGFloat(50), isSafe: true, position: .zero, shouldDispersion: false, dispersionDuration: 1, timeToClick: 3),
+            playerLives: 3);
     }
 
     let circleSize: CGFloat = 50
@@ -88,27 +88,50 @@ class ReflexGameViewModel : ObservableObject
         CreateNewCircleTarget()
         resetCircleLifetimeTimer(isUserFault: false, isSafe: gameModel.circleTarget.isSafe)
     }
-
+    private var colors : [Color] = [.green, .yellow, .blue, .orange, .black]
+    
     private func CreateNewCircleTarget(){
+        var divider =  gameModel.gameTimerValue/10;
+        if(gameModel.gameTimerValue<10)
+        {
+            divider = 1;
+        }else if(gameModel.gameTimerValue<20)
+        {
+            divider=2;
+        }else if(gameModel.gameTimerValue<30)
+        {
+            divider=3;
+        }else if(gameModel.gameTimerValue<40)
+        {
+            divider=3.5;
+        }else 
+        {
+            divider=3.8;
+        }
+       
+        print(divider)
         if(shouldOccurWithProbability(20))
         {
-            gameModel.CreateNewCircleTarget(color: .red, isSafe: false, size: 50, position: generateRandomPosition(), dispersionDuration: 0.2, timeToClick: 3)
+            gameModel.CreateNewCircleTarget(color: .red, isSafe: false, size: 50, position: generateRandomPosition(), dispersionDuration: 2/divider, timeToClick: 3/divider)
         }else{
-            gameModel.CreateNewCircleTarget(color: .green, isSafe: true, size: 50, position: generateRandomPosition(), dispersionDuration: 0.2, timeToClick: 3)
+            gameModel.CreateNewCircleTarget(color: colors.randomElement() ?? .green, isSafe: true, size: 50, position: generateRandomPosition(), dispersionDuration: 2/divider, timeToClick: 3/divider)
         }
     }
+    
     func reset() {
         gameModel.setScore(0)
         gameModel.setGameTimerValue(0)
         gameModel.setPlayerLives(3)
         gameModel.setIsGameEnded(false);
     }
+    
     func startGame()
     {
         reset();
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             self?.gameModel.addGameTime(1)
         }
+        stopCircleLifetimeTimer()
         CreateNewCircleTarget()
         startCircleLifetimeTimer()
     }
@@ -116,7 +139,7 @@ class ReflexGameViewModel : ObservableObject
     func endGame()
     {
         gameTimer?.invalidate()
-        circleLifetimeTimer?.invalidate()
+        stopCircleLifetimeTimer()
         gameModel.setIsGameEnded(true);
     }
     
@@ -128,16 +151,19 @@ class ReflexGameViewModel : ObservableObject
 
     private func startCircleLifetimeTimer() {
         let isSafe = gameModel.circleTarget.isSafe; //avoid clousers
-        self.circleLifetimeTimer = Timer.scheduledTimer(withTimeInterval: gameModel.timeToClick, repeats: false) { [weak self] _ in
+        self.circleLifetimeTimer = Timer.scheduledTimer(withTimeInterval: gameModel.circleTarget.timeToClick, repeats: false) { [weak self] _ in
             if let isGameEnded = self?.gameModel.isGameEnded, !isGameEnded {
                    self?.CreateNewCircleTarget()
                    self?.resetCircleLifetimeTimer(isUserFault: true, isSafe: isSafe)
                }
         }
     }
-    
-    private func resetCircleLifetimeTimer(isUserFault : Bool, isSafe:Bool) {
+    func stopCircleLifetimeTimer()
+    {
         circleLifetimeTimer?.invalidate()
+    }
+    private func resetCircleLifetimeTimer(isUserFault : Bool, isSafe:Bool) {
+        stopCircleLifetimeTimer()
         if(isUserFault == true && isSafe == true)
         {
             playerFault()
