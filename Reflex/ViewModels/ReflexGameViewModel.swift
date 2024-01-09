@@ -9,7 +9,7 @@ import SwiftUI
 
 class ReflexGameViewModel : ObservableObject
 {
-    @Published var gameModel : ReflexGameModel = CreateReflexGame()
+    @Published private var gameModel : ReflexGameModel = CreateReflexGame()
     private var circleLifetimeTimer: Timer?
     private var gameTimer: Timer?
     private var dispresionDuration = 5
@@ -18,6 +18,7 @@ class ReflexGameViewModel : ObservableObject
     public func getIsGameInProgress() -> Bool {
         return gameModel.isGameEnded;
     }
+   
     
     public static func CreateReflexGame() -> ReflexGameModel
     {
@@ -30,10 +31,35 @@ class ReflexGameViewModel : ObservableObject
     }
 
     let circleSize: CGFloat = 50
+    
     func setProxySize(proxySize: CGSize){
         gameModel.setProxySize(proxySize)
     }
     
+    var GameTimer : TimeInterval
+    {
+        return gameModel.gameTimerValue;
+    }
+    var GameScore : Int
+    {
+        return gameModel.score;
+    }
+    
+    var PlayerLives : Int{
+        return gameModel.playerLives;
+    }
+    
+    var GameEnded : Bool {
+        get{
+            return gameModel.isGameEnded
+        }set{
+            gameModel.isGameEnded = newValue
+        }
+    }
+    var CircleTarget : ReflexGameModel.CircleTarget
+    {
+        return gameModel.circleTarget;
+    }
     
     func setDispresion(_ shouldDispresion : Bool)
     {
