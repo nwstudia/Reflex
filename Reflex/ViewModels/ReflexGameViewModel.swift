@@ -10,7 +10,6 @@ import SwiftUI
 class ReflexGameViewModel : ObservableObject
 {
     @Published var gameModel : ReflexGameModel = CreateReflexGame()
-    @Published var showAlert : Bool = true;
     private var circleLifetimeTimer: Timer?
     private var gameTimer: Timer?
     private var dispresionDuration = 5
@@ -94,22 +93,21 @@ class ReflexGameViewModel : ObservableObject
         var divider =  gameModel.gameTimerValue/10;
         if(gameModel.gameTimerValue<10)
         {
-            divider = 1;
+            divider = 1.5;
         }else if(gameModel.gameTimerValue<20)
         {
-            divider=2;
+            divider=3;
         }else if(gameModel.gameTimerValue<30)
         {
-            divider=3;
+            divider=3.5;
         }else if(gameModel.gameTimerValue<40)
         {
-            divider=3.5;
-        }else 
+            divider=3.6;
+        }else
         {
             divider=3.8;
         }
        
-        print(divider)
         if(shouldOccurWithProbability(20))
         {
             gameModel.CreateNewCircleTarget(color: .red, isSafe: false, size: 50, position: generateRandomPosition(), dispersionDuration: 2/divider, timeToClick: 3/divider)

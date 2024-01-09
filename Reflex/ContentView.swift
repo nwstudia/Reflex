@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var reflexGameViewModel: ReflexGameViewModel = ReflexGameViewModel()
+    
     var body: some View {
         VStack {
-            ReflexGameView()
+            ReflexGameView(reflexGameViewModel: reflexGameViewModel)
         }
         .padding()
     }

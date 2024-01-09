@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ReflexGameView: View {
-    @StateObject var reflexGameViewModel: ReflexGameViewModel = ReflexGameViewModel()
-   
+    @ObservedObject var reflexGameViewModel: ReflexGameViewModel 
+    
+    init(reflexGameViewModel: ReflexGameViewModel) {
+        self.reflexGameViewModel = reflexGameViewModel
+    }
 
     private var scoreView: some View {
         Text("Punkty: \(reflexGameViewModel.gameModel.score)")
@@ -59,5 +62,5 @@ struct ReflexGameView: View {
 }
 
 #Preview {
-    ReflexGameView()
+    ReflexGameView(reflexGameViewModel: ReflexGameViewModel())
 }
