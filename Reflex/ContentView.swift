@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var reflexGameViewModel: ReflexGameViewModel = ReflexGameViewModel()
+    @ObservedObject var reflexGameViewModel: ReflexGameViewModel
     
     var body: some View {
         VStack {
@@ -19,5 +19,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(reflexGameViewModel: ReflexGameViewModel())
 }

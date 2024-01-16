@@ -31,6 +31,7 @@ struct CircleView: View {
                 }
             }
              .modifier(DispersionModifier(viewModel: reflexGameViewModel))
+             .opacity(reflexGameViewModel.GameEnded ? 0 : 100)
                      
     }
     

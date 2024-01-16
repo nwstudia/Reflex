@@ -116,13 +116,15 @@ class ReflexGameViewModel : ObservableObject
     private var colors : [Color] = [.green, .yellow, .blue, .orange, .black]
     
     private func CreateNewCircleTarget(){
+        guard !gameModel.isGameEnded else {return;}
+        
         var divider =  gameModel.gameTimerValue/10;
         if(gameModel.gameTimerValue<10)
         {
             divider = 1.5;
         }else if(gameModel.gameTimerValue<20)
         {
-            divider=3;
+            divider = 3;
         }else if(gameModel.gameTimerValue<30)
         {
             divider=3.5;

@@ -25,7 +25,7 @@ struct ReflexGameView: View {
                        .padding()
     }
     private var playerLives : some View {
-        Text("Zycia gracza: \(reflexGameViewModel.PlayerLives) /3")
+        Text("Zycia gracza:\n\(reflexGameViewModel.PlayerLives) /3")
                        .padding()
     }
    

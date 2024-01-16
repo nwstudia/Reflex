@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ReflexApp: App {
+    @StateObject var reflexGameViewModel: ReflexGameViewModel = ReflexGameViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(reflexGameViewModel: reflexGameViewModel)
         }
     }
 }
