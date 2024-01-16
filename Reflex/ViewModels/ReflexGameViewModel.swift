@@ -53,7 +53,7 @@ class ReflexGameViewModel : ObservableObject
         get{
             return gameModel.isGameEnded
         }set{
-            gameModel.isGameEnded = newValue
+            gameModel.setIsGameEnded(newValue)
         }
     }
     var CircleTarget : ReflexGameModel.CircleTarget

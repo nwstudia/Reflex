@@ -14,7 +14,7 @@ struct ReflexGameModel
     private(set) var gameTimerValue: TimeInterval
     private(set) var circleTarget : CircleTarget
     private(set) var playerLives : Int
-    var isGameEnded : Bool = false
+    private(set) var isGameEnded : Bool = false
     
     init(score : Int, proxySize : CGSize, gameTimerValue : TimeInterval, circleTarget : CircleTarget, playerLives : Int)
     {
